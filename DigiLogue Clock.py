@@ -11,10 +11,6 @@ s.title("Clock")
 s.tracer(0)
 t.ht()
 
-sec = dt.datetime.now().second
-min = dt.datetime.now().minute
-hr = dt.datetime.now().hour
-
 
 def clock(h_h, m_h, s_h, t):
     # Clock's base
@@ -68,17 +64,16 @@ char = True
 
 
 while char:  # for continuous view of clock
+    sec, min, hr = dt.datetime.now().second, dt.datetime.now().minute, dt.datetime.now().hour
     h_h, m_h, s_h = int(time.strftime("%I")), int(time.strftime("%M")), int(time.strftime("%S"))
-
-    clock(h_h, m_h, s_h, t)
-    print(str(h_h).zfill(2) + ":" + str(m_h).zfill(2) + ":" + str(s_h).zfill(2))
+    c, p = clock(h_h, m_h, s_h, t), print("%s:%s:%s" % (hr, min, sec))
+    lambda j: [p, c]
     # for digital clock
     t.pu()
     t.goto(-110, 296)
     t.pendown()
-    t.color("orange")
+    t.color("cyan")
     t.write(str(h_h).zfill(2) + ":" + str(m_h).zfill(2) + ":" + str(s_h).zfill(2), font=("Georgia", 45, "normal"))
     s.update()
     time.sleep(1)
     t.clear()
-    # turtle.Screen.exitonclick()
